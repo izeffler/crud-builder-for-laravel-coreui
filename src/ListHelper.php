@@ -83,8 +83,8 @@ class ListHelper
                     $q->orWhere(function ($subQuery) use ($column, $search) {
                         $parts = explode('.', $column);
                         if (count($parts) > 1) {
-                            $relation = array_shift($parts);
-                            $field = implode('.', $parts);
+                            $field = array_pop($parts);
+                            $relation = implode('.', $parts);
                             $subQuery->orWhereHas($relation, function ($relationQuery) use ($field, $search) {
                                 $relationQuery->where($field, 'like', '%' . $search . '%');
                             });
